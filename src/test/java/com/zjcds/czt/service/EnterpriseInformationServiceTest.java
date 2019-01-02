@@ -13,7 +13,8 @@ public class EnterpriseInformationServiceTest extends SpringBootTestSupport{
     private EnterpriseInformationService enterpriseInformationService;
 //    @Test
 //    public void name() {
-//        System.out.println(enterpriseInformationService.queryRegisterOrgName("fFfFfff"));
+//        System.out.println(enterpriseInformationService.queryRegisterOrgName("北京小吉科技"));
+//        System.out.println(enterpriseInformationService.queryRegisterOrgName("浙江协同数据"));
 //    }
 //
 //    @Test
