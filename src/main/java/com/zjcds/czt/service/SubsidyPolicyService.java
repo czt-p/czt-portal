@@ -25,4 +25,11 @@ public interface SubsidyPolicyService {
      */
     public List<SubsidyPolicy> queryByRegisterDepartment(String name);
 
+    /**
+     * 根据企业名称查询其能享受的资助政策
+     * @param companyName
+     * @return
+     */
+    public List<SubsidyPolicy> querySubsidyPolicyByCompanyName(String companyName);
+
 }

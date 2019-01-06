@@ -10,6 +10,9 @@ import com.zjcds.czt.conf.SmsProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +27,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +57,7 @@ public class SmsSendService implements InitializingBean{
     @Override
     public void afterPropertiesSet() throws Exception {
         List<Loader<?>> loaders = new ArrayList<>();
-        loaders.add(new FileTemplateLoader(templateFile.getFile()));
+        loaders.add(new FileTemplateLoader(templateFile.getInputStream()));
         pebbleEngine = new PebbleEngine
                 .Builder()
                 .loader(new DelegatingLoader(loaders)).build();
@@ -148,12 +148,16 @@ public class SmsSendService implements InitializingBean{
 
         private static String separator = "\\|\\|";
 
-        public FileTemplateLoader(File file) {
-            if (file == null || !file.exists()) {
+        public FileTemplateLoader(InputStream is) {
+            if (is == null) {
                 log.warn("短信模板配置文件不存在！");
             } else {
-                try (Stream<String> stringStream = Files.lines(file.toPath())){
-                    stringStream.forEach(line -> {
+                LineIterator lineIterator = null;
+                try {
+                    lineIterator = IOUtils.lineIterator(is,"UTF-8");
+                    String line;
+                    while (lineIterator.hasNext()) {
+                        line = lineIterator.nextLine();
                         String[] lineArray;
                         if(StringUtils.isNotBlank(line)){
                             lineArray = line.split(separator);
@@ -164,10 +168,14 @@ public class SmsSendService implements InitializingBean{
                                 throw new IllegalArgumentException("检测到短信模板文本配置出错："+line);
                             }
                         }
-                    });
+                    }
                 } catch (Exception e) {
                     log.error("读取短信模板配置文件出错！",e);
                     throw new IllegalStateException(e);
+                }
+                finally {
+                    if(lineIterator != null)
+                         lineIterator.close();
                 }
             }
         }
