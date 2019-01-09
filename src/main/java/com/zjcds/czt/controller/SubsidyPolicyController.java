@@ -79,6 +79,7 @@ public class SubsidyPolicyController {
     }
 
     @GetMapping("/recentModify")
+    @ApiOperation(value = "查询最新更新的10条资助政策", produces = "application/json;charset=utf-8")
     public ResponseResult<List<SubsidyPolicyForm.Owner>> queryRecentModifySubsidyPolicies() {
         return new ResponseResult<>(BeanPropertyCopyUtils.copy(subsidyPolicyService.queryRecent10UpdateSubsidyPolicy(), SubsidyPolicyForm.Owner.class));
     }
