@@ -26,6 +26,13 @@ public class ExamResultForm {
     @Setter
     public static class HighExamResult extends BaseBean {
         private Double score;
+
+        public HighExamResult() {
+        }
+
+        public HighExamResult(Double score) {
+            this.score = score;
+        }
     }
 
     @Getter

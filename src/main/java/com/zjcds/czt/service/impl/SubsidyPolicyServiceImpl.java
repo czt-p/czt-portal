@@ -1,5 +1,7 @@
 package com.zjcds.czt.service.impl;
 
+import com.zjcds.common.base.domain.page.Paging;
+import com.zjcds.common.jpa.PageResult;
 import com.zjcds.czt.dao.jpa.RegisterDepartmentDao;
 import com.zjcds.czt.dao.jpa.SubsidyPolicyDao;
 import com.zjcds.czt.domain.entity.RegisterDepartment;
@@ -39,7 +41,7 @@ public class SubsidyPolicyServiceImpl implements SubsidyPolicyService {
         } else if (regionCode.endsWith("00")) {
             regionCode = regionCode.replaceFirst("00", "");
         }
-        return subsidyPolicyDao.findByRegionCodeLike("%" + regionCode + "%");
+        return subsidyPolicyDao.findByRegionCodeLike(regionCode + "%");
     }
 
     @Override
@@ -48,11 +50,13 @@ public class SubsidyPolicyServiceImpl implements SubsidyPolicyService {
         if (CollectionUtils.isNotEmpty(rds)) {
             String regionCode = rds.get(0).getRegionCode();
             if (StringUtils.isNotBlank(regionCode)) {
-                return subsidyPolicyDao.findByRegionCode(regionCode);
+                List<SubsidyPolicy> result = subsidyPolicyDao.findByRegionCode(regionCode);
+                if (result != null) {
+                    return result;
+                }
             }
-        }
-        else {
-            log.warn("未查询到登记机构["+name+"]对应的区域代码！");
+        } else {
+            log.warn("未查询到登记机构[" + name + "]对应的区域代码！");
         }
         return Collections.EMPTY_LIST;
     }
@@ -61,10 +65,20 @@ public class SubsidyPolicyServiceImpl implements SubsidyPolicyService {
     public List<SubsidyPolicy> querySubsidyPolicyByCompanyName(String companyName) {
         //先查询登记机构名称
         String orgNamme = enterpriseInformationService.queryRegisterOrgName(companyName);
-        if(StringUtils.isBlank(orgNamme)) {
-            log.warn("未查询到企业["+companyName+"]对应的机构名称！");
+        if (StringUtils.isBlank(orgNamme)) {
+            log.warn("未查询到企业[" + companyName + "]对应的机构名称！");
             return Collections.emptyList();
         }
         return queryByRegisterDepartment(orgNamme);
+    }
+
+    @Override
+    public PageResult<SubsidyPolicy> querySubsidyPolicies(Paging paging, List<String> queryString, List<String> orderBy) {
+        return subsidyPolicyDao.findAll(paging, queryString, orderBy);
+    }
+
+    @Override
+    public List<SubsidyPolicy> queryRecent10UpdateSubsidyPolicy() {
+        return subsidyPolicyDao.findTop10Modify();
     }
 }

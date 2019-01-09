@@ -64,7 +64,7 @@ public class HighExamServiceImpl implements HighExamService {
 
     @Override
     public ExamResultForm.HighExamResult answerHighExam(List<ExamQuestionForm.Answer> answers) {
-        return null;
+        return new ExamResultForm.HighExamResult(80D);
     }
 
     private Double calcScore(ExamQuestion examQuestion, List<ExamQuestionForm.Answer> answers) {
