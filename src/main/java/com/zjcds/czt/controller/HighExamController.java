@@ -20,7 +20,7 @@ import java.util.List;
 @JsonViewException
 @RestController
 @RequestMapping("/highExams")
-@Api(description = "高新技术问题搜索操作")
+@Api(description = "高新评测操作")
 public class HighExamController {
 
     @Autowired
