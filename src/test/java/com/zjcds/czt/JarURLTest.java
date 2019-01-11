@@ -20,7 +20,7 @@ public class JarURLTest extends SpringBootTestSupport{
     @Test
     public void name() throws Exception{
         Assert.assertNotNull(resourceLoader);
-//        URI jarUrl = new URI("file:/D:/JAVA/Maven/repository/com/zjcds/common/cds-starter-syslog/2.1-SNAPSHOT/cds-starter-syslog-2.1-SNAPSHOT.jar!/sql/syslog/H2_1.sql");
+//        URI jarUrl = new URI("file:/XCL:/JAVA/Maven/repository/com/zjcds/common/cds-starter-syslog/2.1-SNAPSHOT/cds-starter-syslog-2.1-SNAPSHOT.jar!/sql/syslog/H2_1.sql");
         Resource resource = resourceLoader.getResource("classpath:/sql/syslog/H2_1.sql");
         InputStream is = resource.getInputStream();
         IOUtils.copy(is,System.out);
