@@ -11,26 +11,24 @@ public class CostCalcService {
 
     public Double calcHighFieldCost(HighField highField) {
         switch (highField) {
-            case DAXX:
-                return 43000D;
-            case SWYSYY:
-                return 43000D;
+            case DZXX:
+                return 40000D;
+            case SWYXYY:
+                return 50000D;
             case HKHT:
-                return 53000D;
+                return 60000D;
             case XCL:
-                return 48000D;
+                return 50000D;
             case GXJSFW:
-                return 53000D;
-
+                return 45000D;
             case XNYYJN:
-                return 53000D;
-
+                return 60000D;
             case ZYYHJ:
-                return 55000D;
-
+                return 60000D;
             case XJZZYZDH:
-                return 53000D;
-
+                return 50000D;
+            case QT:
+                return 100000D;
             default:
                 return 0D;
         }
@@ -39,20 +37,13 @@ public class CostCalcService {
     public Double calcFinancialGrowthCost(FinancialGrowth financialGrowth) {
         switch (financialGrowth) {
             case A:
-                return 0D;
-
+                return 5000D;
             case B:
-                return 8000D;
-
+                return 10000D;
             case C:
-                return 11000D;
-
+                return 15000D;
             case D:
-                return 18000D;
-
-            case E:
-                return 28000D;
-
+                return 30000D;
             default:
                 return 0D;
         }
@@ -61,23 +52,19 @@ public class CostCalcService {
     public Double calcRecentYearIncomingCost(RecentYearIncoming recentYearIncoming) {
         switch (recentYearIncoming) {
             case A:
-                return 0D;
-
+                return 10000D;
             case B:
                 return 5000D;
-
             case C:
-                return 80000D;
-
+                return 5000D;
             case D:
-                return 11000D;
-
+                return 10000D;
             case E:
-                return 18000D;
-
+                return 20000D;
             case F:
-                return 33000D;
-
+                return 30000D;
+            case G:
+                return 50000D;
             default:
                 return 0D;
         }
@@ -86,17 +73,27 @@ public class CostCalcService {
     public Double calcIPCost(IPType ipType, Integer quantity) {
         switch (ipType) {
             case FMZL:
-                return 5500D * quantity;
-
+                return (5000D + 3455D) * quantity;
             case SYXXZL:
-                return 2300D * quantity;
-
+                return (2000D + 505D) * quantity;
             case WGZL:
-                return 1000D * quantity;
-
+                return (800D + 505D) * quantity;
             case RJZZQ:
-                return 1000D * quantity;
-
+                return 900D * quantity;
+            case JCDLBTSJ:
+                return 0D * quantity;
+            case FMZL85:
+                return (5000D + 565D) * quantity;
+            case SYXXZL85:
+                return (2000D + 80D) * quantity;
+            case WGZL85:
+                return (800D + 80D) * quantity;
+            case FMZL70:
+                return (5000D + 1075D) * quantity;
+            case SYXXZL70:
+                return (2000D + 155D) * quantity;
+            case WGZL70:
+                return (800D + 155D) * quantity;
             default:
                 return 0D;
         }
@@ -105,45 +102,41 @@ public class CostCalcService {
     public Double calcOtherCost(OtherCostType otherCostType, Integer quantity) {
         switch (otherCostType) {
             case RJPCBG:
-                return 3000D * quantity;
-
+                return 2000D * quantity;
             case CXBG:
-                return 1600D * quantity;
-
+                return 850D * quantity;
             case CPJCBG:
-                return 3200D * quantity;
-
-            case CWGFFD:
+                return 3500D * quantity;
+            case CWYFFDDJZ:
                 return 8000D * quantity;
-
+            case SJXCP:
+                return 0D * quantity;
             default:
                 return 0D;
         }
     }
 
     public Double calcAnnualAuditCost(Double amount) {
-        if (amount <= 50) {
-            return 2000D;
-        } else if (amount <= 180) {
+        if (amount <= 200) {
             return 3000D;
         } else if (amount <= 300) {
-            return amount * 100 * 0.17;
+            return 3500D;
         } else if (amount <= 600) {
-            return amount * 100 * 0.10;
+            return 4500D;
         } else if (amount <= 1000) {
-            return amount * 100 * 0.07;
+            return 5800D;
         } else if (amount <= 2000) {
-            return amount * 100 * 0.04;
+            return 7000D;
         } else if (amount <= 4000) {
-            return amount * 100 * 0.028;
+            return 8500D;
         } else if (amount <= 6000) {
-            return amount * 100 * 0.015;
+            return 11000D;
         } else if (amount <= 8000) {
-            return amount * 100 * 0.0145;
+            return 12500D;
         } else if (amount <= 10000) {
-            return amount * 100 * 0.013;
+            return 14000D;
         } else {
-            return amount * 100 * 0.011;
+            return amount * 100 * 0.014;
         }
     }
 
@@ -153,16 +146,30 @@ public class CostCalcService {
         if (raCost == null || raCost == 0D) {
             raCost = managerCost / 2;
         }
-        if (raCost / incoming >= 0.05) {
-            raCostFY = calcRACostRuleA(incoming, raCost);
+        if (incoming <= 500) {
+            if (raCost / incoming >= 0.05) {
+                raCostFY = calcRACostRuleA(incoming, raCost);
+            } else {
+                raCostFY = calcRACostRuleB(incoming, raCost);
+            }
+        } else if (incoming < 2000) {
+            if (raCost / incoming >= 0.04) {
+                raCostFY = calcRACostRuleA(incoming, raCost);
+            } else {
+                raCostFY = calcRACostRuleB(incoming, raCost);
+            }
         } else {
-            raCostFY = calcRACostRuleB(incoming, raCost);
+            if (raCost / incoming >= 0.03) {
+                raCostFY = calcRACostRuleA(incoming, raCost);
+            } else {
+                raCostFY = calcRACostRuleB(incoming, raCost);
+            }
         }
         incomingCost = calcIncomingCost(incoming);
         return raCostFY + incomingCost;
     }
 
-    private Double calcRACostRuleA(Double incoming, Double raCost) {
+    public Double calcRACostRuleA(Double incoming, Double raCost) {
         if (raCost <= 100) {
             return 3000D;
         } else if (raCost <= 300) {
@@ -186,55 +193,53 @@ public class CostCalcService {
         }
     }
 
-    private Double calcRACostRuleB(Double incoming, Double raCost) {
+    public Double calcRACostRuleB(Double incoming, Double raCost) {
         if (incoming <= 50) {
             return 3000D;
-        } else if (incoming < 180) {
+        } else if (incoming <= 180) {
             return 3000D;
         } else if (incoming <= 300) {
-            return raCost * 100 * 0.18;
-        } else if (incoming <= 600) {
-            return raCost * 100 * 0.12;
-        } else if (incoming <= 1000) {
-            return raCost * 100 * 0.075;
-        } else if (incoming <= 2000) {
-            return raCost * 100 * 0.042;
-        } else if (incoming <= 4000) {
-            return raCost * 100 * 0.023;
-        } else if (incoming <= 6000) {
-            return raCost * 100 * 0.015;
-        } else if (incoming <= 8000) {
-            return raCost * 100 * 0.014;
-        } else if (incoming <= 10000) {
-            return raCost * 100 * 0.0128;
-        } else {
-            return raCost * 100 * 0.0128;
-        }
-    }
-
-    private Double calcIncomingCost(Double incoming) {
-        if (incoming <= 50) {
-            return 3800D;
-        } else if (incoming < 180) {
-            return 3800D;
-        } else if (incoming <= 300) {
-            return incoming * 100 * 0.20;
+            return incoming * 100 * 0.18;
         } else if (incoming <= 600) {
             return incoming * 100 * 0.12;
         } else if (incoming <= 1000) {
             return incoming * 100 * 0.075;
         } else if (incoming <= 2000) {
-            return incoming * 100 * 0.044;
+            return incoming * 100 * 0.042;
         } else if (incoming <= 4000) {
-            return incoming * 100 * 0.024;
+            return incoming * 100 * 0.023;
         } else if (incoming <= 6000) {
             return incoming * 100 * 0.015;
         } else if (incoming <= 8000) {
-            return incoming * 100 * 0.0142;
+            return incoming * 100 * 0.014;
         } else if (incoming <= 10000) {
             return incoming * 100 * 0.0128;
         } else {
             return incoming * 100 * 0.0128;
+        }
+    }
+
+    public Double calcIncomingCost(Double incoming) {
+        if (incoming <= 200) {
+            return 3000D;
+        } else if (incoming <= 300) {
+            return 3500D;
+        } else if (incoming <= 600) {
+            return 4500D;
+        } else if (incoming <= 1000) {
+            return 5800D;
+        } else if (incoming <= 2000) {
+            return 7000D;
+        } else if (incoming <= 4000) {
+            return 8500D;
+        } else if (incoming <= 6000) {
+            return 11000D;
+        } else if (incoming <= 8000) {
+            return 12500D;
+        } else if (incoming <= 10000) {
+            return 14000D;
+        } else {
+            return incoming * 100 * 0.014;
         }
     }
 

@@ -11,8 +11,9 @@ public enum RecentYearIncoming implements EnumValue<String, String> {
     B("B", "500-2000万元以内"),
     C("C", "2001万元-5000万元"),
     D("D", "5001万元-2亿"),
-    E("E", "2亿-4亿"),
-    F("F", "4亿以上");
+    E("E", "2亿-5亿"),
+    F("F", "5亿-10亿"),
+    G("G", "10亿以上");
 
     private String key;
     private String value;

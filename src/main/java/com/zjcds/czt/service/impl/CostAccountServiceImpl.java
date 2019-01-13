@@ -245,9 +245,21 @@ public class CostAccountServiceImpl implements CostAccountService {
         record.setCompanyName(companyName);
         record.setTelephone(telephone);
         record.setConsultCost(costResultDetail.getConsultCost().getTotalCost());
-        record.setIpCost(costResultDetail.getIpCost().getTotalCost());
-        record.setOtherCost(costResultDetail.getOtherCost().getTotalCost());
-        record.setAnnualAuditCost(costResultDetail.getAnnualAuditCost().getTotalCost());
+        if (costResultDetail.getIpCost() == null) {
+            record.setIpCost(0D);
+        } else {
+            record.setIpCost(costResultDetail.getIpCost().getTotalCost());
+        }
+        if (costResultDetail.getOtherCost() == null) {
+            record.setOtherCost(0D);
+        } else {
+            record.setOtherCost(costResultDetail.getOtherCost().getTotalCost());
+        }
+        if (costResultDetail.getAnnualAuditCost() == null) {
+            record.setAnnualAuditCost(0D);
+        } else {
+            record.setAnnualAuditCost(costResultDetail.getAnnualAuditCost().getTotalCost());
+        }
         record.setSpecialAuditCost(costResultDetail.getSpecialAuditCost().getTotalCost());
         record.setTotalCost(totalCost);
         record.setDetails(JsonUtils.toJson(costResultDetail));

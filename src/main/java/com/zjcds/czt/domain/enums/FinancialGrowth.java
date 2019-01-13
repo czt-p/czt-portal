@@ -8,10 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = FinancialGrowth.FinancialGrowthDeserializer.class)
 public enum FinancialGrowth implements EnumValue<String, String> {
     A("A", "优秀"),
-    B("B", "好"),
-    C("C", "良好"),
-    D("D", "一般"),
-    E("E", "差");
+    B("B", "良好"),
+    C("C", "一般"),
+    D("D", "差");
 
     private String key;
     private String value;

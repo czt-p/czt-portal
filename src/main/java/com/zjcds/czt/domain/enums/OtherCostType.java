@@ -4,10 +4,11 @@ package com.zjcds.czt.domain.enums;
  * @author luokp on 2019/1/2.
  */
 public enum OtherCostType implements EnumValue<String, String> {
-    RJPCBG("RJPCBG", "软件评测报告"),
-    CXBG("CXBG", "查新报告"),
-    CPJCBG("CPJCBG", "产品检测报告"),
-    CWGFFD("CWGFFD", "财务规范辅导");
+    RJPCBG("RJPCBG", "软件评测报告（不包含代理费）"),
+    CXBG("CXBG", "查新报告（不包含代理费）"),
+    CPJCBG("CPJCBG", "产品检测报告（不包含代理费）"),
+    CWYFFDDJZ("CWYFFDDJZ", "财务研发费单独建账"),
+    SJXCP("SJXCP", "省级新产品");
 
     private String key;
 
