@@ -46,7 +46,7 @@ public class HighExamController {
 
     @PostMapping("/high/detailResult")
     @ApiOperation(value = "发送评测报告", produces = "application/json;charset=utf-8")
-    public ResponseResult<Void> sendDetailResult(ExamResultForm.SendDetailResult form) {
+    public ResponseResult<Void> sendDetailResult(@RequestBody ExamResultForm.SendDetailResult form) {
         highExamService.sendDetailResult(form.getCompanyName(), form.getTelephone());
         return new ResponseResult<>(null);
     }
