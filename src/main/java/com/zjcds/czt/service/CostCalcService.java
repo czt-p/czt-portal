@@ -1,7 +1,12 @@
 package com.zjcds.czt.service;
 
+import com.zjcds.czt.domain.CostAccountData;
 import com.zjcds.czt.domain.enums.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author luokp on 2019/1/2.
@@ -9,26 +14,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class CostCalcService {
 
+    @Autowired
+    private CostAccountData costAccountData;
+
     public Double calcHighFieldCost(HighField highField) {
         switch (highField) {
             case DZXX:
-                return 40000D;
+                return costAccountData.getHighFieldCost().get(0);
             case SWYXYY:
-                return 50000D;
+                return costAccountData.getHighFieldCost().get(1);
             case HKHT:
-                return 60000D;
+                return costAccountData.getHighFieldCost().get(2);
             case XCL:
-                return 50000D;
+                return costAccountData.getHighFieldCost().get(3);
             case GXJSFW:
-                return 45000D;
+                return costAccountData.getHighFieldCost().get(4);
             case XNYYJN:
-                return 60000D;
+                return costAccountData.getHighFieldCost().get(5);
             case ZYYHJ:
-                return 60000D;
+                return costAccountData.getHighFieldCost().get(6);
             case XJZZYZDH:
-                return 50000D;
+                return costAccountData.getHighFieldCost().get(7);
             case QT:
-                return 100000D;
+                return costAccountData.getHighFieldCost().get(8);
             default:
                 return 0D;
         }
@@ -37,13 +45,13 @@ public class CostCalcService {
     public Double calcFinancialGrowthCost(FinancialGrowth financialGrowth) {
         switch (financialGrowth) {
             case A:
-                return 5000D;
+                return costAccountData.getFinancialGrowthCost().get(0);
             case B:
-                return 10000D;
+                return costAccountData.getFinancialGrowthCost().get(1);
             case C:
-                return 15000D;
+                return costAccountData.getFinancialGrowthCost().get(2);
             case D:
-                return 30000D;
+                return costAccountData.getFinancialGrowthCost().get(3);
             default:
                 return 0D;
         }
@@ -52,19 +60,19 @@ public class CostCalcService {
     public Double calcRecentYearIncomingCost(RecentYearIncoming recentYearIncoming) {
         switch (recentYearIncoming) {
             case A:
-                return 10000D;
+                return costAccountData.getRecentYearIncomingCost().get(0);
             case B:
-                return 5000D;
+                return costAccountData.getRecentYearIncomingCost().get(1);
             case C:
-                return 5000D;
+                return costAccountData.getRecentYearIncomingCost().get(2);
             case D:
-                return 10000D;
+                return costAccountData.getRecentYearIncomingCost().get(3);
             case E:
-                return 20000D;
+                return costAccountData.getRecentYearIncomingCost().get(4);
             case F:
-                return 30000D;
+                return costAccountData.getRecentYearIncomingCost().get(5);
             case G:
-                return 50000D;
+                return costAccountData.getRecentYearIncomingCost().get(6);
             default:
                 return 0D;
         }
@@ -73,27 +81,27 @@ public class CostCalcService {
     public Double calcIPCost(IPType ipType, Integer quantity) {
         switch (ipType) {
             case FMZL:
-                return (5000D + 3455D) * quantity;
+                return costAccountData.getIpCost().get(0) * quantity;
             case SYXXZL:
-                return (2000D + 505D) * quantity;
+                return costAccountData.getIpCost().get(1) * quantity;
             case WGZL:
-                return (800D + 505D) * quantity;
+                return costAccountData.getIpCost().get(2) * quantity;
             case RJZZQ:
-                return 900D * quantity;
+                return costAccountData.getIpCost().get(3) * quantity;
             case JCDLBTSJ:
-                return 0D * quantity;
+                return costAccountData.getIpCost().get(4) * quantity;
             case FMZL85:
-                return (5000D + 565D) * quantity;
+                return costAccountData.getIpCost().get(5) * quantity;
             case SYXXZL85:
-                return (2000D + 80D) * quantity;
+                return costAccountData.getIpCost().get(6) * quantity;
             case WGZL85:
-                return (800D + 80D) * quantity;
+                return costAccountData.getIpCost().get(7) * quantity;
             case FMZL70:
-                return (5000D + 1075D) * quantity;
+                return costAccountData.getIpCost().get(8) * quantity;
             case SYXXZL70:
-                return (2000D + 155D) * quantity;
+                return costAccountData.getIpCost().get(9) * quantity;
             case WGZL70:
-                return (800D + 155D) * quantity;
+                return costAccountData.getIpCost().get(10) * quantity;
             default:
                 return 0D;
         }
@@ -102,15 +110,15 @@ public class CostCalcService {
     public Double calcOtherCost(OtherCostType otherCostType, Integer quantity) {
         switch (otherCostType) {
             case RJPCBG:
-                return 2000D * quantity;
+                return costAccountData.getOtherCost().get(0) * quantity;
             case CXBG:
-                return 850D * quantity;
+                return costAccountData.getOtherCost().get(1) * quantity;
             case CPJCBG:
-                return 3500D * quantity;
+                return costAccountData.getOtherCost().get(2) * quantity;
             case CWYFFDDJZ:
-                return 8000D * quantity;
+                return costAccountData.getOtherCost().get(3) * quantity;
             case SJXCP:
-                return 0D * quantity;
+                return costAccountData.getOtherCost().get(4) * quantity;
             default:
                 return 0D;
         }
@@ -118,25 +126,25 @@ public class CostCalcService {
 
     public Double calcAnnualAuditCost(Double amount) {
         if (amount <= 200) {
-            return 3000D;
+            return costAccountData.getAnnualAuditCost().get(0);
         } else if (amount <= 300) {
-            return 3500D;
+            return costAccountData.getAnnualAuditCost().get(1);
         } else if (amount <= 600) {
-            return 4500D;
+            return costAccountData.getAnnualAuditCost().get(2);
         } else if (amount <= 1000) {
-            return 5800D;
+            return costAccountData.getAnnualAuditCost().get(3);
         } else if (amount <= 2000) {
-            return 7000D;
+            return costAccountData.getAnnualAuditCost().get(4);
         } else if (amount <= 4000) {
-            return 8500D;
+            return costAccountData.getAnnualAuditCost().get(5);
         } else if (amount <= 6000) {
-            return 11000D;
+            return costAccountData.getAnnualAuditCost().get(6);
         } else if (amount <= 8000) {
-            return 12500D;
+            return costAccountData.getAnnualAuditCost().get(7);
         } else if (amount <= 10000) {
-            return 14000D;
+            return costAccountData.getAnnualAuditCost().get(8);
         } else {
-            return amount * 100 * 0.014;
+            return amount * 100 * costAccountData.getAnnualAuditCost().get(9);
         }
     }
 
@@ -171,75 +179,75 @@ public class CostCalcService {
 
     public Double calcRACostRuleA(Double incoming, Double raCost) {
         if (raCost <= 100) {
-            return 3000D;
+            return costAccountData.getRaACost().get(0);
         } else if (raCost <= 300) {
-            return raCost * 100 * 0.3;
+            return raCost * 100 * costAccountData.getRaACost().get(1);
         } else if (raCost <= 600) {
-            return raCost * 100 * 0.15;
+            return raCost * 100 * costAccountData.getRaACost().get(2);
         } else if (raCost <= 1000) {
-            return raCost * 100 * 0.1;
+            return raCost * 100 * costAccountData.getRaACost().get(3);
         } else if (raCost <= 2000) {
-            return raCost * 100 * 0.085;
+            return raCost * 100 * costAccountData.getRaACost().get(4);
         } else if (raCost <= 4000) {
-            return raCost * 100 * 0.038;
+            return raCost * 100 * costAccountData.getRaACost().get(5);
         } else if (raCost <= 6000) {
-            return raCost * 100 * 0.024;
+            return raCost * 100 * costAccountData.getRaACost().get(6);
         } else if (raCost <= 8000) {
-            return raCost * 100 * 0.02;
+            return raCost * 100 * costAccountData.getRaACost().get(7);
         } else if (raCost <= 10000) {
-            return raCost * 100 * 0.018;
+            return raCost * 100 * costAccountData.getRaACost().get(8);
         } else {
-            return raCost * 100 * 0.014;
+            return raCost * 100 * costAccountData.getRaACost().get(9);
         }
     }
 
     public Double calcRACostRuleB(Double incoming, Double raCost) {
         if (incoming <= 50) {
-            return 3000D;
+            return costAccountData.getRaBCost().get(0);
         } else if (incoming <= 180) {
-            return 3000D;
+            return costAccountData.getRaBCost().get(1);
         } else if (incoming <= 300) {
-            return incoming * 100 * 0.18;
+            return incoming * 100 * costAccountData.getRaBCost().get(2);
         } else if (incoming <= 600) {
-            return incoming * 100 * 0.12;
+            return incoming * 100 * costAccountData.getRaBCost().get(3);
         } else if (incoming <= 1000) {
-            return incoming * 100 * 0.075;
+            return incoming * 100 * costAccountData.getRaBCost().get(4);
         } else if (incoming <= 2000) {
-            return incoming * 100 * 0.042;
+            return incoming * 100 * costAccountData.getRaBCost().get(5);
         } else if (incoming <= 4000) {
-            return incoming * 100 * 0.023;
+            return incoming * 100 * costAccountData.getRaBCost().get(6);
         } else if (incoming <= 6000) {
-            return incoming * 100 * 0.015;
+            return incoming * 100 * costAccountData.getRaBCost().get(7);
         } else if (incoming <= 8000) {
-            return incoming * 100 * 0.014;
+            return incoming * 100 * costAccountData.getRaBCost().get(8);
         } else if (incoming <= 10000) {
-            return incoming * 100 * 0.0128;
+            return incoming * 100 * costAccountData.getRaBCost().get(9);
         } else {
-            return incoming * 100 * 0.0128;
+            return incoming * 100 * costAccountData.getRaBCost().get(10);
         }
     }
 
     public Double calcIncomingCost(Double incoming) {
         if (incoming <= 200) {
-            return 3000D;
+            return costAccountData.getIncomingCost().get(0);
         } else if (incoming <= 300) {
-            return 3500D;
+            return costAccountData.getIncomingCost().get(1);
         } else if (incoming <= 600) {
-            return 4500D;
+            return costAccountData.getIncomingCost().get(2);
         } else if (incoming <= 1000) {
-            return 5800D;
+            return costAccountData.getIncomingCost().get(3);
         } else if (incoming <= 2000) {
-            return 7000D;
+            return costAccountData.getIncomingCost().get(4);
         } else if (incoming <= 4000) {
-            return 8500D;
+            return costAccountData.getIncomingCost().get(5);
         } else if (incoming <= 6000) {
-            return 11000D;
+            return costAccountData.getIncomingCost().get(6);
         } else if (incoming <= 8000) {
-            return 12500D;
+            return costAccountData.getIncomingCost().get(7);
         } else if (incoming <= 10000) {
-            return 14000D;
+            return costAccountData.getIncomingCost().get(8);
         } else {
-            return incoming * 100 * 0.014;
+            return incoming * 100 * costAccountData.getIncomingCost().get(9);
         }
     }
 
