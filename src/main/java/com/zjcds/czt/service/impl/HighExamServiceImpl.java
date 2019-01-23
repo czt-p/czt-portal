@@ -306,6 +306,7 @@ public class HighExamServiceImpl implements HighExamService {
     }
 
     @Override
+    @Transactional
     public void sendDetailResult(String companyName, String telephone) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
@@ -313,7 +314,7 @@ public class HighExamServiceImpl implements HighExamService {
         ExamRecord examRecord = new ExamRecord();
         examRecord.setCompanyName(companyName);
         examRecord.setTelephone(telephone);
-        examRecord.setScore(examRecord.getScore());
+        examRecord.setScore(examResult.getScore());
         examRecord.setResult("公司知识产权情况：" + examResult.getIpSituation() + "；科技成果转化情况：" + examResult.getSaSituation() + "；企业研发组织管理水平：" + examResult.getRamSituation() + "；财务增长情况：" + examResult.getFgSituation());
         examRecord.setDetails(JsonUtils.toJson(examResult.getAnswers()));
         examRecord.setExamTime(new Date());
