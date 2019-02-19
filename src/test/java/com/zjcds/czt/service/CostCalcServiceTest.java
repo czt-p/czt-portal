@@ -53,6 +53,7 @@ public class CostCalcServiceTest extends SpringBootTestSupport {
         assertEquals((Double) 2505D, costCalcService.calcIPCost(IPType.SYXXZL, 1));
         assertEquals((Double) 1305D, costCalcService.calcIPCost(IPType.WGZL, 1));
         assertEquals((Double) 900D, costCalcService.calcIPCost(IPType.RJZZQ, 1));
+        assertEquals((Double) 2005D, costCalcService.calcIPCost(IPType.JCDLBTSJ, 1));
         assertEquals((Double) 5565D, costCalcService.calcIPCost(IPType.FMZL85, 1));
         assertEquals((Double) 2080D, costCalcService.calcIPCost(IPType.SYXXZL85, 1));
         assertEquals((Double) 880D, costCalcService.calcIPCost(IPType.WGZL85, 1));
@@ -67,7 +68,7 @@ public class CostCalcServiceTest extends SpringBootTestSupport {
         assertEquals((Double) 1700D, costCalcService.calcOtherCost(OtherCostType.CXBG, 2));
         assertEquals((Double) 7000D, costCalcService.calcOtherCost(OtherCostType.CPJCBG, 2));
         assertEquals((Double) 16000D, costCalcService.calcOtherCost(OtherCostType.CWYFFDDJZ, 2));
-        assertEquals((Double) 0D, costCalcService.calcOtherCost(OtherCostType.SJXCP, 2));
+        assertEquals((Double) 18000D, costCalcService.calcOtherCost(OtherCostType.SJXCP, 2));
     }
 
     @Test
