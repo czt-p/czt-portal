@@ -10,7 +10,7 @@ public enum IPType implements EnumValue<String, String> {
     FMZL("FMZL", "发明专利（无费减、含代理费）"),
     SYXXZL("SYXXZL", "实用新型专利（无费减、含代理费）"),
     WGZL("WGZL", "外观专利（无费减、含代理费）"),
-    RJZZQ("RJZZQ", "软件著作权（31工作日加急、含代理费，快速加急，与我们联系）"),
+    RJZZQ("RJZZQ", "软件著作权（31工作日加急、含代理费，如需其他加急时间，请与我们联系）"),
     JCDLBTSJ("JCDLBTSJ", "集成电路布图设计"),
     FMZL85("FMZL85", "发明专利（85%费减、含代理费）"),
     SYXXZL85("SYXXZL85", "实用新型专利（85%费减、含代理费）"),

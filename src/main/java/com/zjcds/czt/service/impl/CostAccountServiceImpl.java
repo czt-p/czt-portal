@@ -36,12 +36,27 @@ public class CostAccountServiceImpl implements CostAccountService {
 
     @Override
     public void costAccount(CostAccountForm costAccountForm) {
+        valid(costAccountForm);
         CostResultDetailForm costResultDetail = calcCostResult(costAccountForm);
         AccountRecord record = generateRecord(costAccountForm.getCompanyName(), costAccountForm.getTelephone(), costResultDetail);
         if (!sendResultSms(costAccountForm.getTelephone(), record.getTotalCost(), costResultDetail)) {
             throw new IllegalStateException("发送费用核算报告短信失败！");
         }
         accountRecordDao.save(record);
+    }
+
+    /**
+     * 表单验证
+     *
+     * @param form
+     */
+    private void valid(CostAccountForm form) {
+        if (form == null) {
+            throw new IllegalArgumentException("成本核算内容不能为空");
+        }
+        if (form.getConsultCost() == null && form.getSpecialAuditCost() == null && form.getIpCost() == null && form.getAnnualAuditCost() == null && form.getOtherCost() == null) {
+            throw new IllegalArgumentException("请至少填写一项成本核算内容");
+        }
     }
 
     /**
@@ -72,6 +87,9 @@ public class CostAccountServiceImpl implements CostAccountService {
      * @return
      */
     private ConsultCostResultDetailForm calcConsultCost(ConsultCostForm consultCostForm) {
+        if (consultCostForm == null) {
+            return null;
+        }
         ConsultCostResultDetailForm result = new ConsultCostResultDetailForm();
         ConsultCostResultDetailForm.HighFieldCost highFieldCost = calcHighFieldCost(consultCostForm.getHighField());
         ConsultCostResultDetailForm.FinancialGrowthCost financialGrowthCost = calcFinancialGrowthCost(consultCostForm.getFinancialGrowth());
@@ -208,8 +226,10 @@ public class CostAccountServiceImpl implements CostAccountService {
      * @return
      */
     private SpecialAuditCostResultDetailForm calcSpecialAuditCost(SpecialAuditCostForm form) {
-        if (form == null || CollectionUtils.isEmpty(form.getSpecialAuditList())) {
-            throw new IllegalArgumentException("请填写专项审计报告费用内容");
+        if (form == null) {
+            return null;
+        } else if (CollectionUtils.isEmpty(form.getSpecialAuditList())) {
+            throw new IllegalArgumentException("请至少填写当年专项审计报告费用内容");
         }
         SpecialAuditCostResultDetailForm result = new SpecialAuditCostResultDetailForm();
         result.setApplyYear(form.getApplyYear());
@@ -230,7 +250,9 @@ public class CostAccountServiceImpl implements CostAccountService {
 
     private AccountRecord generateRecord(String companyName, String telephone, CostResultDetailForm costResultDetail) {
         Double totalCost = 0D;
-        totalCost += costResultDetail.getConsultCost().getTotalCost();
+        if (costResultDetail.getConsultCost() != null) {
+            totalCost += costResultDetail.getConsultCost().getTotalCost();
+        }
         if (costResultDetail.getIpCost() != null) {
             totalCost += costResultDetail.getIpCost().getTotalCost();
         }
@@ -240,11 +262,17 @@ public class CostAccountServiceImpl implements CostAccountService {
         if (costResultDetail.getAnnualAuditCost() != null) {
             totalCost += costResultDetail.getAnnualAuditCost().getTotalCost();
         }
-        totalCost += costResultDetail.getSpecialAuditCost().getTotalCost();
+        if (costResultDetail.getSpecialAuditCost() != null) {
+            totalCost += costResultDetail.getSpecialAuditCost().getTotalCost();
+        }
         AccountRecord record = new AccountRecord();
         record.setCompanyName(companyName);
         record.setTelephone(telephone);
-        record.setConsultCost(costResultDetail.getConsultCost().getTotalCost());
+        if (costResultDetail.getConsultCost() == null) {
+            record.setConsultCost(0D);
+        } else {
+            record.setConsultCost(costResultDetail.getConsultCost().getTotalCost());
+        }
         if (costResultDetail.getIpCost() == null) {
             record.setIpCost(0D);
         } else {
@@ -260,7 +288,11 @@ public class CostAccountServiceImpl implements CostAccountService {
         } else {
             record.setAnnualAuditCost(costResultDetail.getAnnualAuditCost().getTotalCost());
         }
-        record.setSpecialAuditCost(costResultDetail.getSpecialAuditCost().getTotalCost());
+        if (costResultDetail.getSpecialAuditCost() == null) {
+            record.setSpecialAuditCost(0D);
+        } else {
+            record.setSpecialAuditCost(costResultDetail.getSpecialAuditCost().getTotalCost());
+        }
         record.setTotalCost(totalCost);
         record.setDetails(JsonUtils.toJson(costResultDetail));
         record.setAccountTime(new Date());

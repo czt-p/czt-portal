@@ -28,7 +28,7 @@ public class CostAccountController {
 
     @PostMapping
     @ApiOperation(value = "成本核算", produces = "application/json;charset=utf-8")
-    public ResponseResult<Void> deleteSubsidyPolicy(@Valid @RequestBody CostAccountForm costAccount) {
+    public ResponseResult<Void> costAccount(@Valid @RequestBody CostAccountForm costAccount) {
         costAccountService.costAccount(costAccount);
         return new ResponseResult<>(null);
     }
