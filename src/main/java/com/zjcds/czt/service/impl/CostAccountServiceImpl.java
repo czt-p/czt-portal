@@ -25,6 +25,8 @@ public class CostAccountServiceImpl implements CostAccountService {
 
     public static String LXDH = "400-878-0703";
 
+    public static String WXH = "17757191952";
+
     @Autowired
     private AccountRecordDao accountRecordDao;
 
@@ -240,7 +242,18 @@ public class CostAccountServiceImpl implements CostAccountService {
             specialAuditCost.setIncoming(specialAudit.getIncoming());
             specialAuditCost.setManagerCost(specialAudit.getManagerCost());
             specialAuditCost.setRdCost(specialAudit.getRdCost());
-            specialAuditCost.setCost(costCalcService.calcSpecialAuditCost(specialAudit.getIncoming(), specialAudit.getManagerCost(), specialAudit.getRdCost()));
+            // 高新收入专审只计算近一年
+            if (specialAudit.getYear() + 1 == form.getApplyYear()) {
+                double incomingSa = costCalcService.calcIncomingSa(specialAudit.getIncoming());
+                double raSa = costCalcService.calcRdSa(specialAudit.getIncoming(), specialAudit.getManagerCost(), specialAudit.getRdCost());
+                specialAuditCost.setIncomingSa(incomingSa);
+                specialAuditCost.setRdSa(raSa);
+                specialAuditCost.setCost(incomingSa + raSa);
+            }else{
+                double raSa = costCalcService.calcRdSa(specialAudit.getIncoming(), specialAudit.getManagerCost(), specialAudit.getRdCost());
+                specialAuditCost.setRdSa(raSa);
+                specialAuditCost.setCost(raSa);
+            }
             costList.add(specialAuditCost);
         }
         result.setCostList(costList);
@@ -344,6 +357,7 @@ public class CostAccountServiceImpl implements CostAccountService {
             variates.put("zxsjbgfy", 0);
         }
         variates.put("lxdh", LXDH);
+        variates.put("wxh", WXH);
         return smsSendService.singleSend(telephone, "gxfyhs", variates);
     }
 

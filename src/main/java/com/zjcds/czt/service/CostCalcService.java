@@ -3,10 +3,7 @@ package com.zjcds.czt.service;
 import com.zjcds.czt.domain.CostAccountData;
 import com.zjcds.czt.domain.enums.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author luokp on 2019/1/2.
@@ -148,60 +145,85 @@ public class CostCalcService {
         }
     }
 
-    public Double calcSpecialAuditCost(Double incoming, Double managerCost, Double raCost) {
-        Double raCostFY;
-        Double incomingCost;
-        if (raCost == null || raCost == 0D) {
-            raCost = managerCost / 2;
+    public Double calcSpecialAuditCost(Double incoming, Double managerCost, Double rdCost) {
+        Double rdSa;
+        Double incomingSa;
+        if (rdCost == null || rdCost == 0D) {
+            rdCost = managerCost / 2;
         }
         if (incoming <= 500) {
-            if (raCost / incoming >= 0.05) {
-                raCostFY = calcRACostRuleA(incoming, raCost);
+            if (rdCost / incoming >= 0.05) {
+                rdSa = calcRdSaRuleA(incoming, rdCost);
             } else {
-                raCostFY = calcRACostRuleB(incoming, raCost);
+                rdSa = calcRdSaRuleB(incoming, rdCost);
             }
         } else if (incoming < 2000) {
-            if (raCost / incoming >= 0.04) {
-                raCostFY = calcRACostRuleA(incoming, raCost);
+            if (rdCost / incoming >= 0.04) {
+                rdSa = calcRdSaRuleA(incoming, rdCost);
             } else {
-                raCostFY = calcRACostRuleB(incoming, raCost);
+                rdSa = calcRdSaRuleB(incoming, rdCost);
             }
         } else {
-            if (raCost / incoming >= 0.03) {
-                raCostFY = calcRACostRuleA(incoming, raCost);
+            if (rdCost / incoming >= 0.03) {
+                rdSa = calcRdSaRuleA(incoming, rdCost);
             } else {
-                raCostFY = calcRACostRuleB(incoming, raCost);
+                rdSa = calcRdSaRuleB(incoming, rdCost);
             }
         }
-        incomingCost = calcIncomingCost(incoming);
-        return raCostFY + incomingCost;
+        incomingSa = calcIncomingSa(incoming);
+        return rdSa + incomingSa;
     }
 
-    public Double calcRACostRuleA(Double incoming, Double raCost) {
-        if (raCost <= 100) {
+    public Double calcRdSa(Double incoming, Double managerCost, Double rdCost){
+        if (rdCost == null || rdCost == 0D) {
+            rdCost = managerCost / 2;
+        }
+        if (incoming <= 500) {
+            if (rdCost / incoming >= 0.05) {
+                return calcRdSaRuleA(incoming, rdCost);
+            } else {
+                return calcRdSaRuleB(incoming, rdCost);
+            }
+        } else if (incoming < 2000) {
+            if (rdCost / incoming >= 0.04) {
+                return calcRdSaRuleA(incoming, rdCost);
+            } else {
+                return calcRdSaRuleB(incoming, rdCost);
+            }
+        } else {
+            if (rdCost / incoming >= 0.03) {
+                return calcRdSaRuleA(incoming, rdCost);
+            } else {
+                return calcRdSaRuleB(incoming, rdCost);
+            }
+        }
+    }
+
+    public Double calcRdSaRuleA(Double incoming, Double rdCost) {
+        if (rdCost <= 100) {
             return costAccountData.getRaACost().get(0);
-        } else if (raCost <= 300) {
-            return raCost * 100 * costAccountData.getRaACost().get(1);
-        } else if (raCost <= 600) {
-            return raCost * 100 * costAccountData.getRaACost().get(2);
-        } else if (raCost <= 1000) {
-            return raCost * 100 * costAccountData.getRaACost().get(3);
-        } else if (raCost <= 2000) {
-            return raCost * 100 * costAccountData.getRaACost().get(4);
-        } else if (raCost <= 4000) {
-            return raCost * 100 * costAccountData.getRaACost().get(5);
-        } else if (raCost <= 6000) {
-            return raCost * 100 * costAccountData.getRaACost().get(6);
-        } else if (raCost <= 8000) {
-            return raCost * 100 * costAccountData.getRaACost().get(7);
-        } else if (raCost <= 10000) {
-            return raCost * 100 * costAccountData.getRaACost().get(8);
+        } else if (rdCost <= 300) {
+            return rdCost * 100 * costAccountData.getRaACost().get(1);
+        } else if (rdCost <= 600) {
+            return rdCost * 100 * costAccountData.getRaACost().get(2);
+        } else if (rdCost <= 1000) {
+            return rdCost * 100 * costAccountData.getRaACost().get(3);
+        } else if (rdCost <= 2000) {
+            return rdCost * 100 * costAccountData.getRaACost().get(4);
+        } else if (rdCost <= 4000) {
+            return rdCost * 100 * costAccountData.getRaACost().get(5);
+        } else if (rdCost <= 6000) {
+            return rdCost * 100 * costAccountData.getRaACost().get(6);
+        } else if (rdCost <= 8000) {
+            return rdCost * 100 * costAccountData.getRaACost().get(7);
+        } else if (rdCost <= 10000) {
+            return rdCost * 100 * costAccountData.getRaACost().get(8);
         } else {
-            return raCost * 100 * costAccountData.getRaACost().get(9);
+            return rdCost * 100 * costAccountData.getRaACost().get(9);
         }
     }
 
-    public Double calcRACostRuleB(Double incoming, Double raCost) {
+    public Double calcRdSaRuleB(Double incoming, Double rdCost) {
         if (incoming <= 50) {
             return costAccountData.getRaBCost().get(0);
         } else if (incoming <= 180) {
@@ -227,7 +249,7 @@ public class CostCalcService {
         }
     }
 
-    public Double calcIncomingCost(Double incoming) {
+    public Double calcIncomingSa(Double incoming) {
         if (incoming <= 200) {
             return costAccountData.getIncomingCost().get(0);
         } else if (incoming <= 300) {

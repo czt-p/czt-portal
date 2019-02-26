@@ -86,46 +86,46 @@ public class CostCalcServiceTest extends SpringBootTestSupport {
     }
 
     @Test
-    public void testCalcRACostRuleA() {
-        assertEquals((Double) 3000D, costCalcService.calcRACostRuleA(10000D, 100D));
-        assertEquals((Double) 9000D, costCalcService.calcRACostRuleA(10000D, 300D));
-        assertEquals((Double) 9000D, costCalcService.calcRACostRuleA(10000D, 600D));
-        assertEquals((Double) 10000D, costCalcService.calcRACostRuleA(10000D, 1000D));
-        assertEquals((Double) 17000D, costCalcService.calcRACostRuleA(10000D, 2000D));
-        assertEquals((Double) 15200D, costCalcService.calcRACostRuleA(10000D, 4000D));
-        assertEquals((Double) 14400D, costCalcService.calcRACostRuleA(10000D, 6000D));
-        assertEquals((Double) 16000D, costCalcService.calcRACostRuleA(10000D, 8000D));
-        assertEquals((Double) 18000D, costCalcService.calcRACostRuleA(10000D, 10000D));
-        assertEquals((Double) 15400D, costCalcService.calcRACostRuleA(10000D, 11000D));
+    public void testCalcRdSaRuleA() {
+        assertEquals((Double) 3000D, costCalcService.calcRdSaRuleA(10000D, 100D));
+        assertEquals((Double) 9000D, costCalcService.calcRdSaRuleA(10000D, 300D));
+        assertEquals((Double) 9000D, costCalcService.calcRdSaRuleA(10000D, 600D));
+        assertEquals((Double) 10000D, costCalcService.calcRdSaRuleA(10000D, 1000D));
+        assertEquals((Double) 17000D, costCalcService.calcRdSaRuleA(10000D, 2000D));
+        assertEquals((Double) 15200D, costCalcService.calcRdSaRuleA(10000D, 4000D));
+        assertEquals((Double) 14400D, costCalcService.calcRdSaRuleA(10000D, 6000D));
+        assertEquals((Double) 16000D, costCalcService.calcRdSaRuleA(10000D, 8000D));
+        assertEquals((Double) 18000D, costCalcService.calcRdSaRuleA(10000D, 10000D));
+        assertEquals((Double) 15400D, costCalcService.calcRdSaRuleA(10000D, 11000D));
     }
 
     @Test
-    public void testCalcRACostRuleB() {
-        assertEquals((Double) 3000D, costCalcService.calcRACostRuleB(50D, 100D));
-        assertEquals((Double) 3000D, costCalcService.calcRACostRuleB(180D, 100D));
-        assertEquals((Double) 5400D, costCalcService.calcRACostRuleB(300D, 100D));
-        assertEquals((Double) 7200D, costCalcService.calcRACostRuleB(600D, 100D));
-        assertEquals((Double) 7500D, costCalcService.calcRACostRuleB(1000D, 100D));
-        assertEquals((Double) 8400D, costCalcService.calcRACostRuleB(2000D, 100D));
-        assertEquals((Double) 9200D, costCalcService.calcRACostRuleB(4000D, 100D));
-        assertEquals((Double) 9000D, costCalcService.calcRACostRuleB(6000D, 100D));
-        assertEquals((Double) 11200D, costCalcService.calcRACostRuleB(8000D, 100D));
-        assertEquals((Double) 12800D, costCalcService.calcRACostRuleB(10000D, 100D));
-        assertEquals((Double) 14080D, costCalcService.calcRACostRuleB(11000D, 100D));
+    public void testCalcRdSaRuleB() {
+        assertEquals((Double) 3000D, costCalcService.calcRdSaRuleB(50D, 100D));
+        assertEquals((Double) 3000D, costCalcService.calcRdSaRuleB(180D, 100D));
+        assertEquals((Double) 5400D, costCalcService.calcRdSaRuleB(300D, 100D));
+        assertEquals((Double) 7200D, costCalcService.calcRdSaRuleB(600D, 100D));
+        assertEquals((Double) 7500D, costCalcService.calcRdSaRuleB(1000D, 100D));
+        assertEquals((Double) 8400D, costCalcService.calcRdSaRuleB(2000D, 100D));
+        assertEquals((Double) 9200D, costCalcService.calcRdSaRuleB(4000D, 100D));
+        assertEquals((Double) 9000D, costCalcService.calcRdSaRuleB(6000D, 100D));
+        assertEquals((Double) 11200D, costCalcService.calcRdSaRuleB(8000D, 100D));
+        assertEquals((Double) 12800D, costCalcService.calcRdSaRuleB(10000D, 100D));
+        assertEquals((Double) 14080D, costCalcService.calcRdSaRuleB(11000D, 100D));
     }
 
     @Test
-    public void testCalcIncomingCost() {
-        assertEquals((Double) 3000D, costCalcService.calcIncomingCost(200D));
-        assertEquals((Double) 3500D, costCalcService.calcIncomingCost(300D));
-        assertEquals((Double) 4500D, costCalcService.calcIncomingCost(600D));
-        assertEquals((Double) 5800D, costCalcService.calcIncomingCost(1000D));
-        assertEquals((Double) 7000D, costCalcService.calcIncomingCost(2000D));
-        assertEquals((Double) 8500D, costCalcService.calcIncomingCost(4000D));
-        assertEquals((Double) 11000D, costCalcService.calcIncomingCost(6000D));
-        assertEquals((Double) 12500D, costCalcService.calcIncomingCost(8000D));
-        assertEquals((Double) 14000D, costCalcService.calcIncomingCost(10000D));
-        assertEquals((Double) 15400D, costCalcService.calcIncomingCost(11000D));
+    public void testCalcIncomingSa() {
+        assertEquals((Double) 3000D, costCalcService.calcIncomingSa(200D));
+        assertEquals((Double) 3500D, costCalcService.calcIncomingSa(300D));
+        assertEquals((Double) 4500D, costCalcService.calcIncomingSa(600D));
+        assertEquals((Double) 5800D, costCalcService.calcIncomingSa(1000D));
+        assertEquals((Double) 7000D, costCalcService.calcIncomingSa(2000D));
+        assertEquals((Double) 8500D, costCalcService.calcIncomingSa(4000D));
+        assertEquals((Double) 11000D, costCalcService.calcIncomingSa(6000D));
+        assertEquals((Double) 12500D, costCalcService.calcIncomingSa(8000D));
+        assertEquals((Double) 14000D, costCalcService.calcIncomingSa(10000D));
+        assertEquals((Double) 15400D, costCalcService.calcIncomingSa(11000D));
     }
 
     @Test

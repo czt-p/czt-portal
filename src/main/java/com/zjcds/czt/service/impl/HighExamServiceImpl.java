@@ -38,6 +38,8 @@ public class HighExamServiceImpl implements HighExamService {
 
     public static String LXDH = "400-878-0703";
 
+    public static String WXH = "17757191952";
+
     @Autowired
     private ExamModuleDao examModuleDao;
 
@@ -335,6 +337,7 @@ public class HighExamServiceImpl implements HighExamService {
         variates.put("glsp", examResult.getRamSituation());
         variates.put("cwzz", examResult.getFgSituation());
         variates.put("lxdh", LXDH);
+        variates.put("wxh", WXH);
         return smsSendService.singleSend(telephone, "gxpc", variates);
     }
 }

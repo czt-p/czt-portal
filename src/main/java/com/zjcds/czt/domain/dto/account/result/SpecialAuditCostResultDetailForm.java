@@ -31,6 +31,10 @@ public class SpecialAuditCostResultDetailForm {
         private Double managerCost;
         @ApiModelProperty(value = "研发费用，单位：万元")
         private Double rdCost;
+        @ApiModelProperty(value = "高新收入专审，单位：元")
+        private Double incomingSa;
+        @ApiModelProperty(value = "研发费专审，单位：元")
+        private Double rdSa;
         @ApiModelProperty(value = "费用，单位：元")
         private Double cost;
     }
