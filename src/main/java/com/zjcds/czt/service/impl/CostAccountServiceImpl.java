@@ -242,18 +242,15 @@ public class CostAccountServiceImpl implements CostAccountService {
             specialAuditCost.setIncoming(specialAudit.getIncoming());
             specialAuditCost.setManagerCost(specialAudit.getManagerCost());
             specialAuditCost.setRdCost(specialAudit.getRdCost());
+            double incomingSa = 0D;
             // 高新收入专审只计算近一年
             if (specialAudit.getYear() + 1 == form.getApplyYear()) {
-                double incomingSa = costCalcService.calcIncomingSa(specialAudit.getIncoming());
-                double raSa = costCalcService.calcRdSa(specialAudit.getIncoming(), specialAudit.getManagerCost(), specialAudit.getRdCost());
-                specialAuditCost.setIncomingSa(incomingSa);
-                specialAuditCost.setRdSa(raSa);
-                specialAuditCost.setCost(incomingSa + raSa);
-            }else{
-                double raSa = costCalcService.calcRdSa(specialAudit.getIncoming(), specialAudit.getManagerCost(), specialAudit.getRdCost());
-                specialAuditCost.setRdSa(raSa);
-                specialAuditCost.setCost(raSa);
+                incomingSa = costCalcService.calcIncomingSa(specialAudit.getIncoming());
             }
+            double raSa = costCalcService.calcRdSa(specialAudit.getIncoming(), specialAudit.getManagerCost(), specialAudit.getRdCost());
+            specialAuditCost.setIncomingSa(incomingSa);
+            specialAuditCost.setRdSa(raSa);
+            specialAuditCost.setCost(incomingSa + raSa);
             costList.add(specialAuditCost);
         }
         result.setCostList(costList);
