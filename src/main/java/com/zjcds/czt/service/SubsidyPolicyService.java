@@ -2,7 +2,7 @@ package com.zjcds.czt.service;
 
 import com.zjcds.common.base.domain.page.Paging;
 import com.zjcds.common.jpa.PageResult;
-import com.zjcds.czt.domain.entity.SubsidyPolicy;
+import com.zjcds.czt.domain.entity.jpa.SubsidyPolicy;
 
 import java.util.List;
 

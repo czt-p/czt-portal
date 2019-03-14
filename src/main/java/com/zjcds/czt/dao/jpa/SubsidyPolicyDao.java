@@ -1,9 +1,7 @@
 package com.zjcds.czt.dao.jpa;
 
 import com.zjcds.common.jpa.CustomRepostory;
-import com.zjcds.czt.domain.entity.SubsidyPolicy;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import com.zjcds.czt.domain.entity.jpa.SubsidyPolicy;
 
 import java.util.List;
 

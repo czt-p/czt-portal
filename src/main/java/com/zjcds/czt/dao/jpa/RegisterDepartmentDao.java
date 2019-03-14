@@ -1,7 +1,7 @@
 package com.zjcds.czt.dao.jpa;
 
 import com.zjcds.common.jpa.CustomRepostory;
-import com.zjcds.czt.domain.entity.RegisterDepartment;
+import com.zjcds.czt.domain.entity.jpa.RegisterDepartment;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

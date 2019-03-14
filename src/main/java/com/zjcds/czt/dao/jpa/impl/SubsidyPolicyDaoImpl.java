@@ -2,7 +2,7 @@ package com.zjcds.czt.dao.jpa.impl;
 
 import com.zjcds.czt.dao.jpa.SubsidyPolicyDao;
 import com.zjcds.czt.dao.jpa.SubsidyPolicyDaoCustom;
-import com.zjcds.czt.domain.entity.SubsidyPolicy;
+import com.zjcds.czt.domain.entity.jpa.SubsidyPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;

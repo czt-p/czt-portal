@@ -1,6 +1,6 @@
 package com.zjcds.czt.dao.jpa;
 
-import com.zjcds.czt.domain.entity.SubsidyPolicy;
+import com.zjcds.czt.domain.entity.jpa.SubsidyPolicy;
 
 import java.util.List;
 

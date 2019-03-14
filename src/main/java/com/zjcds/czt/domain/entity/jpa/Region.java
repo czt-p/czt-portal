@@ -1,4 +1,4 @@
-package com.zjcds.czt.domain.entity;
+package com.zjcds.czt.domain.entity.jpa;
 
 import javax.persistence.*;
 

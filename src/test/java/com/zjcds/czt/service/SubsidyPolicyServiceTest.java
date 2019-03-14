@@ -1,7 +1,7 @@
 package com.zjcds.czt.service;
 
 import com.zjcds.czt.SpringBootTestSupport;
-import com.zjcds.czt.domain.entity.SubsidyPolicy;
+import com.zjcds.czt.domain.entity.jpa.SubsidyPolicy;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
