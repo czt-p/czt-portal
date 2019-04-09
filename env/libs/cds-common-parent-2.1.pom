@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zjcds.common</groupId>
+    <artifactId>cds-common-parent</artifactId>
+    <version>2.1</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--工程环境属性-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <project.scm.id>my-scm-server</project.scm.id>
+        <dozer.version>5.5.1</dozer.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
+    <scm>
+        <connection>scm:git:http://115.236.161.138/base/cds-common-parent.git</connection>
+        <developerConnection>scm:git:http://115.236.161.138/base/cds-common-parent.git</developerConnection>
+      <tag>HEAD</tag>
+  </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.0.36:8080/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Local Nexus Repository</name>
+            <url>http://192.168.0.36:8080/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--第三方组件版本管理-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>1.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.metamodel</groupId>
+                <artifactId>MetaModel-full</artifactId>
+                <version>5.1.0-RC1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-cassandra</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-couchdb</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-csv</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-excel</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-neo4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-fixedwidth</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-hadoop</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-hbase</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-json</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-mongodb-mongo3</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-mongodb-mongo2</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-openoffice</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-sugarcrm</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-xml</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-elasticsearch-rest</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-pojo</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-salesforce</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.metamodel</groupId>
+                        <artifactId>MetaModel-elasticsearch-native</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.15</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer-spring</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.12</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>webjars-locator</artifactId>
+                <version>0.32-1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.27</version>
+            </dependency>
+
+            <!--数据库驱动-->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.196</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.42</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>2.7.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>2.3.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.mchange</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.zaxxer</groupId>
+                        <artifactId>HikariCP-java6</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--框架组件版本管理-->
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-common-base</artifactId>
+                <version>2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-jsonview</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-datasource</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-actuator-ext</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-jpa</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-swagger</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-dozer</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-db-auto-update</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-datastore</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-syslog</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zjcds.common</groupId>
+                <artifactId>cds-starter-scheduler</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-release-plugin</artifactId>-->
+                <!--<version>2.3</version>-->
+                <!--<configuration>-->
+                    <!--<providerImplementations>-->
+                        <!--<git>jgit</git>-->
+                    <!--</providerImplementations>-->
+                <!--</configuration>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.apache.maven.scm</groupId>-->
+                        <!--<artifactId>maven-scm-provider-jgit</artifactId>-->
+                        <!--<version>1.9.5</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.9.5</version>
+                <configuration>
+                    <providerImplementations>
+                        <git>jgit</git>
+                    </providerImplementations>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-jgit</artifactId>
+                        <version>1.9.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
